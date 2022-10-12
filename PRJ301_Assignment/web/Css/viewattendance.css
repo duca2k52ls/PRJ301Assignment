@@ -1,0 +1,83 @@
+.title {
+    font-size: 50px;
+    padding: 20px;
+}
+
+.home {
+    background-color: rgb(227, 221, 221);
+    padding: 10px;
+    padding-left: 20px;
+    margin-left: 20px;
+}
+
+.function {
+    font-size: 30px;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+table,
+th,
+td {
+    border: 0.05px solid white;
+    text-align: center;
+}
+
+th,
+td {
+    border-bottom: 0.5px solid rgb(221, 220, 220);
+}
+
+th {
+    background-color: rgb(130, 167, 238);
+}
+
+.view th {
+    border: 0.5px solid rgb(221, 220, 220);
+}
+
+.view td {
+    border: 0.5px solid rgb(221, 220, 220);
+}
+
+.view th {
+    padding: 10px;
+}
+.view td {
+    padding: 10px;
+}
+#cou1{
+    padding: 0px;
+}
+#cam1{
+    padding: 0px;
+    margin-left: 20px;
+}
+#tem1{
+    padding: 0px;
+    width: 100px;
+}
+#vie1{
+    padding: 0px;
+}
+#tem1 th{
+    width: 100px;
+}
+.term th{
+    padding: 5px;
+}
+.campus th{
+    padding: 5px;
+}
+.course th{
+    padding: 5px;
+}
+.term td{
+    text-align: left;
+}
+.campus td{
+    text-align: left;
+}
+.course td{
+    text-align: left;
+}
