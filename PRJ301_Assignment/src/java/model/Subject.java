@@ -10,11 +10,10 @@ import java.util.ArrayList;
  *
  * @author Admin
  */
-public class Student {
+public class Subject {
     private int id;
     private String name;
     private ArrayList<Group> groups = new ArrayList<>();
-    private ArrayList<Attendance> attandances = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -39,13 +38,6 @@ public class Student {
     public void setGroups(ArrayList<Group> groups) {
         this.groups = groups;
     }
-
-    public ArrayList<Attendance> getAttandances() {
-        return attandances;
-    }
-
-    public void setAttandances(ArrayList<Attendance> attandances) {
-        this.attandances = attandances;
-    }
+    
     
 }
