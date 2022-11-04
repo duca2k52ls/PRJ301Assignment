@@ -78,12 +78,12 @@ public class Session {
         this.index = index;
     }
 
-    public boolean isAttandated() {
+    public boolean isAttendated() {
         return attendated;
     }
 
-    public void setAttandated(boolean attandated) {
-        this.attendated = attandated;
+    public void setAttendated(boolean attendated) {
+        this.attendated = attendated;
     }
 
     public ArrayList<Attendance> getAttendances() {

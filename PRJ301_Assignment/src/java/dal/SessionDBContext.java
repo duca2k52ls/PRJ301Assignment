@@ -31,13 +31,11 @@ public class SessionDBContext extends DBContext{
             stm.setInt(1, model.getId());
             stm.executeUpdate();
 
-            //remove old attandances
             sql = "DELETE Attandance WHERE sesid = ?";
-            PreparedStatement stm_delete = connection.prepareStatement(sql);
-            stm_delete.setInt(1, model.getId());
-            stm_delete.executeUpdate();
+            PreparedStatement delete = connection.prepareStatement(sql);
+            delete.setInt(1, model.getId());
+            delete.executeUpdate();
 
-            //insert new attandances
             for (Attendance att : model.getAttendances()) {
                 sql = "INSERT INTO [Attandance]\n"
                         + "           ([sesid]\n"
@@ -51,12 +49,12 @@ public class SessionDBContext extends DBContext{
                         + "           ,?\n"
                         + "           ,?\n"
                         + "           ,GETDATE())";
-                PreparedStatement stm_insert = connection.prepareStatement(sql);
-                stm_insert.setInt(1, model.getId());
-                stm_insert.setInt(2, att.getStudent().getId());
-                stm_insert.setBoolean(3, att.isPresent());
-                stm_insert.setString(4, att.getDescription());
-                stm_insert.executeUpdate();
+                PreparedStatement insert = connection.prepareStatement(sql);
+                insert.setInt(1, model.getId());
+                insert.setInt(2, att.getStudent().getId());
+                insert.setBoolean(3, att.isPresent());
+                insert.setString(4, att.getDescription());
+                insert.executeUpdate();
             }
             connection.commit();
         } catch (SQLException ex) {
@@ -129,13 +127,12 @@ public class SessionDBContext extends DBContext{
 
                     ses.setDate(rs.getDate("date"));
                     ses.setIndex(rs.getInt("index"));
-                    ses.setAttandated(rs.getBoolean("attanded"));
+                    ses.setAttendated(rs.getBoolean("attanded"));
                 }
-                //read student
                 Student s = new Student();
                 s.setId(rs.getInt("stdid"));
                 s.setName(rs.getString("stdname"));
-                //read attandance
+                
                 Attendance a = new Attendance();
                 a.setStudent(s);
                 a.setSession(ses);

@@ -12,7 +12,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Attendance;
 import model.Session;
+import model.Student;
 
 /**
  *
@@ -40,10 +42,10 @@ public class AttendanceController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         int sesid = Integer.parseInt(request.getParameter("id"));
-        SessionDBContext sesDB = new SessionDBContext();
-        Session ses = sesDB.get(sesid);
+        SessionDBContext DB = new SessionDBContext();
+        Session ses = DB.get(sesid);
         request.setAttribute("ses", ses);
-        request.getRequestDispatcher("").forward(request, response);
+        request.getRequestDispatcher("AttendOfTeacher.jsp").forward(request, response);
     } 
 
     /** 
@@ -56,7 +58,21 @@ public class AttendanceController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+        Session ses = new Session();
+        ses.setId(Integer.parseInt(request.getParameter("sesid")));
+        String[] stdids = request.getParameterValues("stdid");
+        for (String stdid : stdids) {
+            Attendance a =new Attendance();
+            Student s = new Student();
+            a.setStudent(s);
+            a.setDescription(request.getParameter("description"+stdid));
+            a.setPresent(request.getParameter("present"+stdid).equals("present"));
+            s.setId(Integer.parseInt(stdid));
+            ses.getAttendances().add(a);
+        }
+        SessionDBContext db = new SessionDBContext();
+        db.update(ses);
+        response.sendRedirect("AttendanceController?id="+ses.getId());
     }
 
     /** 
