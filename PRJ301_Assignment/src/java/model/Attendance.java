@@ -4,25 +4,27 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
  * @author Admin
  */
 public class Attendance {
-    private int id;
     private Session session;
     private Student student;
     private boolean present;
     private String description;
+    private Date record_time;
 
-    public int getId() {
-        return id;
+    public Date getRecord_time() {
+        return record_time;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setRecord_time(Date record_time) {
+        this.record_time = record_time;
     }
-
+    
     public Session getSession() {
         return session;
     }

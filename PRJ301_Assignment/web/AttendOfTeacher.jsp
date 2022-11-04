@@ -51,19 +51,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                     <tr>
                         <td>${loop.index+1}</td>
                         <td>${attend.session.group.subject.name}</td>
-                        <td>${attend.student.id}</td>
-                    <input type="hidden" name="stdid" value="${attend.student.id}"/>
-                    <td>${attend.student.name}</td>
-                    <td><input type="radio" 
-                               <c:if test="${attend.present eq true}">
-                                   checked="checked"
-                               </c:if> name="present${attend.student.id}" value="present"></td>
-                    <td><input type="radio" 
-                               <c:if test="${attend.present eq false}">
-                                   checked="checked"
-                               </c:if> name="present${attend.student.id}" value="absent"></td>
-                    <td><input type="text" name="document${attend.student.id}" value="${attend.description}"></td>
-                    <td class="hyperlink"><a href="#">Show image</a></td>
+                        <td>${attend.student.id}
+                            <input type="hidden" name="stdid" value="${attend.student.id}"/>
+                        </td>
+                        <td>${attend.student.name}</td>
+                        <td><input type="radio" 
+                                   <c:if test="${attend.present eq true}">
+                                       checked="checked"
+                                   </c:if> 
+                                   name="present${attend.student.id}" value="present"></td>
+                        <td><input type="radio" 
+                                   <c:if test="${attend.present eq false}">
+                                       checked="checked"
+                                   </c:if> 
+                                   name="present${attend.student.id}" value="absent"></td>
+                        <td><input type="text" name="document${attend.student.id}" value="${attend.description}"></td>
+                        <td class="hyperlink"><a href="#">Show image</a></td>
                     </tr>
                 </c:forEach>
             </table>
