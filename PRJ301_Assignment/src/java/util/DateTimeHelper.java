@@ -36,7 +36,7 @@ public class DateTimeHelper {
     }
 
     public static java.sql.Date toDateSql(java.util.Date d) {
-        d= removeTime(d);
+        d = removeTime(d);
         return new java.sql.Date(d.getTime());
     }
 
@@ -46,57 +46,68 @@ public class DateTimeHelper {
         int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
         return dayOfWeek;
     }
-    
-    public static Date addDays(java.util.Date d, int days)
-    {
-        Calendar cal = Calendar.getInstance(); 
+
+    public static Date addDays(java.util.Date d, int days) {
+        Calendar cal = Calendar.getInstance();
         cal.setTime(d);
         cal.add(Calendar.DATE, days);
         return cal.getTime();
     }
-    
-    public static ArrayList<java.sql.Date> 
-        getDateList(java.sql.Date from, java.sql.Date to)
-    {
+
+    public static ArrayList<java.sql.Date>
+            getDateList(java.sql.Date from, java.sql.Date to) {
         ArrayList<java.sql.Date> dates = new ArrayList<>();
         int days = 0;
         java.util.Date e_from = toDateUtil(from);
         java.util.Date e_to = toDateUtil(to);
-        while(true)
-        {
+        while (true) {
             java.util.Date d = DateTimeHelper.addDays(e_from, days);
             dates.add(toDateSql(d));
             days++;
-            if(d.compareTo(e_to)>=0)
+            if (d.compareTo(e_to) >= 0) {
                 break;
+            }
         }
         return dates;
     }
-    
+
     public static String getDayNameofWeek(java.sql.Date s) {
         java.util.Date d = toDateUtil(s);
         Calendar c = Calendar.getInstance();
         c.setTime(d);
         int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-        switch(dayOfWeek)
-        {
-            case 1: return "Sun";
-            case 2: return "Mon";
-            case 3: return "Tue";
-            case 4: return "Wed";
-            case 5: return "Thu";
-            case 6: return "Fri";
-            case 7: return "Sat";
+        switch (dayOfWeek) {
+            case 1:
+                return "Sun";
+            case 2:
+                return "Mon";
+            case 3:
+                return "Tue";
+            case 4:
+                return "Wed";
+            case 5:
+                return "Thu";
+            case 6:
+                return "Fri";
+            case 7:
+                return "Sat";
         }
         return "Error";
     }
-    
-    public static int compare(java.sql.Date a, java.sql.Date b)
-    {
-       
+
+    public static int compare(java.sql.Date a, java.sql.Date b) {
+
         Date e_a = toDateUtil(a);
         Date e_b = toDateUtil(b);
-         System.out.println(a + " " + b +" " +e_a.compareTo(e_b));
+        System.out.println(a + " " + b + " " + e_a.compareTo(e_b));
         return e_a.compareTo(e_b);
+    }
+    
+    public static float getDaystoCurrent(java.sql.Date d)
+    {
+        java.util.Date e = new java.util.Date(d.getTime());
+        java.util.Date current = new java.util.Date();
+        long diff = current.getTime() - e.getTime();
+        return ((float)diff / (1000*60*60*24));
     }
 }

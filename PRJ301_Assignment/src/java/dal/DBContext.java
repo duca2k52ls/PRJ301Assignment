@@ -15,19 +15,19 @@ import java.util.logging.Logger;
  * @author Admin
  */
 public class DBContext {
-    protected Connection connection;
-    public DBContext()
-    {
-        try {
-            String username = "sa";
-            String password = "123";
-            String url = "jdbc:sqlserver://LAPTOP-RIO4CQPU\\SQLEXPRESS:1433;databaseName=PRJ301_FALL2022_Assignment1";
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            connection = DriverManager.getConnection(url, username, password);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public Connection getConnection()throws Exception {
+        String url = "jdbc:sqlserver://"+serverName+":"+portNumber + "\\" + instance +";databaseName="+dbName;
+        if(instance == null || instance.trim().isEmpty())
+            url = "jdbc:sqlserver://"+serverName+":"+portNumber +";databaseName="+dbName;
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        return DriverManager.getConnection(url, userID, password);
     }
+    
+    
+    private final String serverName = "localhost";
+    private final String dbName = "PRJ301_FALL2022_Assignment1";
+    private final String portNumber = "1433";
+    private final String instance="";//LEAVE THIS ONE EMPTY IF YOUR SQL IS A SINGLE INSTANCE
+    private final String userID = "sa";
+    private final String password = "123";
 }
