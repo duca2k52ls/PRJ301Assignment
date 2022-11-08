@@ -232,6 +232,73 @@ public class SessionDBContext extends DBContext{
         }
         return sessions;
     }
+    public ArrayList<Session> getStudentTimetable(int stdid, Date from, Date to) {
+        ArrayList<Session> sessions = new ArrayList<>();
+        try {
+            String sql = "Select r.rid, r.rname,\n"
+                    + "ts.tid, ts.[description],\n"
+                    + "g.gid, g.gname,\n"
+                    + "sub.subid, sub.subname,\n"
+                    + "a.present, std.stdid, std.stdname,\n"
+                    + "s.[date], s.sesid, s.[index], s.attanded\n"
+                    + "from [Session] s\n"
+                    + "INNER JOIN [Room] r ON s.rid = r.rid\n"
+                    + "INNER JOIN [TimeSlot] ts ON ts.tid = s.tid\n"
+                    + "INNER JOIN [Group] g ON g.gid = s.gid\n"
+                    + "INNER JOIN [Subject] sub ON sub.subid = g.subid\n"
+                    + "INNER JOIN [Student_Group] sg ON sg.gid = g.gid\n"
+                    + "INNER JOIN [Student] std ON std.stdid = sg.stdid\n"
+                    + "left JOIN [Attandance] a ON a.stdid = std.stdid AND s.sesid = a.sesid\n"
+                    + "WHERE std.stdid = ? AND s.date BETWEEN ? and ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, stdid);
+            stm.setDate(2, from);
+            stm.setDate(3, to);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Session session = new Session();
+                Room r = new Room();
+                Group g = new Group();
+                TimeSlot t = new TimeSlot();
+                Subject sub = new Subject();
+                Attendance att = new Attendance();
+                Student s = new Student();
+
+                session.setId(rs.getInt("sesid"));
+                session.setDate(rs.getDate("date"));
+                session.setIndex(rs.getInt("index"));
+                session.setAttendated(rs.getBoolean("attanded"));
+
+                att.setPresent(rs.getBoolean("present"));
+                session.getAttendances().add(att);
+
+                s.setId(rs.getInt("stdid"));
+                s.setName(rs.getString("stdname"));
+                g.getStudents().add(s);
+
+                g.setId(rs.getInt("gid"));
+                g.setName(rs.getString("gname"));
+                session.setGroup(g);
+
+                sub.setId(rs.getInt("subid"));
+                sub.setName(rs.getString("subname"));
+                g.setSubject(sub);
+
+                r.setId(rs.getInt("rid"));
+                r.setName(rs.getString("rname"));
+                session.setRoom(r);
+
+                t.setId(rs.getInt("tid"));
+                t.setDescription(rs.getString("description"));
+                session.setTimeslot(t);
+
+                sessions.add(session);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return sessions;
+    }
     public ArrayList<Session> getAttStatus(String stdid,int subid, String sem, String year) {
             ArrayList<Session> sessions = new ArrayList<>();
         try {
