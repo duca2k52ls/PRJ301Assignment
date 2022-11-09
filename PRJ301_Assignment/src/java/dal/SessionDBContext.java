@@ -299,7 +299,7 @@ public class SessionDBContext extends DBContext{
         }
         return sessions;
     }
-    public ArrayList<Session> getAttStatus(String stdid,int subid, String sem, String year) {
+    public ArrayList<Session> getAttStatus(int stdid,int subid, String sem, String year) {
             ArrayList<Session> sessions = new ArrayList<>();
         try {
             String sql = "select s.[date], r.rid, r.rname, t.tid, t.[description], l.lid, l.lname, g.gname, a.present, s.attanded from Session s\n"
@@ -313,7 +313,7 @@ public class SessionDBContext extends DBContext{
                     + "left join Attandance a on a.stdid= st.stdid and a.sesid = s.sesid\n"
                     + "where st.stdid = ? and sub.subid = ? and g.sem = ? and g.[year]= ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, stdid);
+            stm.setInt(1, stdid);
             stm.setInt(2, subid);
             stm.setString(3, sem);
             stm.setString(4, year);

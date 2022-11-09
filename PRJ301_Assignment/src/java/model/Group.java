@@ -16,7 +16,25 @@ public class Group {
     private ArrayList<Student> students = new ArrayList<>();
     private Subject subject;
     private Lecture lectures;
+    private String sem;
+    private int year;
 
+    public String getSem() {
+        return sem;
+    }
+
+    public void setSem(String sem) {
+        this.sem = sem;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+    
     public int getId() {
         return id;
     }

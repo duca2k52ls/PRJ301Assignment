@@ -65,7 +65,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                                        checked="checked"
                                    </c:if> 
                                    name="present${attend.student.id}" value="absent"></td>
-                        <td><input type="text" name="document${attend.student.id}" value="${attend.description}"></td>
+                        <td><input type="text" name="description${attend.student.id}" value="${attend.description}"></td>
                         <td class="hyperlink"><a href="#">Show image</a></td>
                     </tr>
                 </c:forEach>
