@@ -106,7 +106,7 @@
                         </c:forEach>
                     </table>
                     <div>
-                        <strong>Percent:</strong>
+                        
                     </div>
                 </div>
             </div>
