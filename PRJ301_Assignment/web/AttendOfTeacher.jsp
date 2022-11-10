@@ -22,6 +22,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
         <div class="function">Take attendance</div>
         <div class="intro">
             Take attendance for Group:<strong> ${requestScope.ses.group.name}</strong><br/>
+            <form action="AttendanceController" method="get">
+            Your Lesson:
+                <select name="id">
+                    <c:forEach items="${requestScope.listses}" var="lecture">
+                    <option value="${lecture.getId()}">${lecture.getId()}</option>
+                    </c:forEach>
+                    <input type="submit" value="Attend">
+                </select>
+            </form>
             Room: <strong>${requestScope.ses.room.name}</strong><br/>
             Date: <strong>${requestScope.ses.date}</strong><br>
             Time: <strong>${requestScope.ses.timeslot.description}</strong><br/>

@@ -22,6 +22,14 @@ public class Session {
     private boolean attendated; 
     private ArrayList<Attendance> attendances = new ArrayList<>();
 
+    public Session() {
+    }
+
+    public Session(int id) {
+        this.id = id;
+    }
+
+    
     public int getId() {
         return id;
     }

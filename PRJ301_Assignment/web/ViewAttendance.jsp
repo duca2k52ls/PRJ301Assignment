@@ -41,7 +41,7 @@
                                     <th>TERM</th>
                                 </tr>
                                 <tr>
-                                    <td>Fall-2022</td>
+                                    <td><a href="#">Fall-2022</a></td>
                                 </tr>
                             </table>
                         </div>
@@ -105,6 +105,9 @@
                             </tr>
                         </c:forEach>
                     </table>
+                    <div>
+                        <strong>Percent:</strong>
+                    </div>
                 </div>
             </div>
         </div>

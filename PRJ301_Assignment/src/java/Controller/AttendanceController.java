@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import model.Attendance;
 import model.Session;
 import model.Student;
@@ -44,6 +45,10 @@ public class AttendanceController extends HttpServlet {
         int sesid = Integer.parseInt(request.getParameter("id"));
         SessionDBContext DB = new SessionDBContext();
         Session ses = DB.get(sesid);
+        int lid = ses.getLecturer().getId();
+        ArrayList<Session> listses = new ArrayList<>();
+        listses = DB.getAttSessionOfLecture(lid);
+        request.setAttribute("listses", listses);
         request.setAttribute("ses", ses);
         request.getRequestDispatcher("AttendOfTeacher.jsp").forward(request, response);
     } 
