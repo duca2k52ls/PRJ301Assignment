@@ -359,18 +359,23 @@ public class SessionDBContext extends DBContext {
         return null;
     }
 
-    public ArrayList<Session> getAttSessionOfLecture(int lid) {
+    public ArrayList<Session> getAttSessionOfLecture(int lid, int gid) {
         ArrayList<Session> list = new ArrayList<>();
         try {
-            String sql = "select sesid from Session s\n"
+            String sql = "select sesid, s.date, g.gname from Session s\n"
                     + "inner join Lecturer l on l.lid=s.lid\n"
-                    + "where l.lid=?";
+                    + "inner join [Group] g on g.lid = l.lid\n"
+                    + "where l.lid=? and g.gid=?";
             PreparedStatement pre = connection.prepareStatement(sql);
             pre.setInt(1, lid);
+            pre.setInt(2, gid);
             ResultSet rs = pre.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 int sesid = rs.getInt("sesid");
-                list.add(new Session(sesid));
+                Date date = rs.getDate("date");
+                Group groups = new Group();
+                groups.setName(rs.getString("gname"));
+                list.add(new Session(sesid, date, groups));
             }
         } catch (Exception e) {
         }

@@ -26,7 +26,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
             Your Lesson:
                 <select name="id">
                     <c:forEach items="${requestScope.listses}" var="lecture">
-                    <option value="${lecture.getId()}">${lecture.getId()}</option>
+                    <option value="${lecture.getId()}">${lecture.getId()} - ${lecture.getDate()}</option>
                     </c:forEach>
                     <input type="submit" value="Attend">
                 </select>

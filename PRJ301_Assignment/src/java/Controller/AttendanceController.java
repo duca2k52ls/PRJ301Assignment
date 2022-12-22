@@ -46,8 +46,9 @@ public class AttendanceController extends HttpServlet {
         SessionDBContext DB = new SessionDBContext();
         Session ses = DB.get(sesid);
         int lid = ses.getLecturer().getId();
+        int gid = ses.getGroup().getId();
         ArrayList<Session> listses = new ArrayList<>();
-        listses = DB.getAttSessionOfLecture(lid);
+        listses = DB.getAttSessionOfLecture(lid, gid);
         request.setAttribute("listses", listses);
         request.setAttribute("ses", ses);
         request.getRequestDispatcher("AttendOfTeacher.jsp").forward(request, response);

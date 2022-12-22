@@ -25,8 +25,14 @@ public class Session {
     public Session() {
     }
 
-    public Session(int id) {
+    public Session(int id, Date date, Group group) {
         this.id = id;
+        this.date = date;
+        this.group = group;
+    }
+
+    public Session(Group group) {
+        this.group = group;
     }
 
     
